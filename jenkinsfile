@@ -6,7 +6,13 @@ pipeline {
         maven "maven3.8"
     }
 
-    stages {
+	stages{
+		stage ('Test'){
+			steps{
+				input 'Do youwant too proceed?'
+			}
+		}
+	}
         stage('Build') {
             steps {
                 // Get some code from a GitHub repository
@@ -28,4 +34,4 @@ pipeline {
                 }
             }
         }
-    }
+  }
