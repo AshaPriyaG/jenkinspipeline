@@ -24,6 +24,11 @@ pipeline {
 			}
 		}
 	}
+	stages{
+		stage ('Test'){
+			input 'Do youwant too proceed?'
+			}
+	}
         stage('Build') {
             steps {
                 // Get some code from a GitHub repository
