@@ -6,17 +6,31 @@ pipeline {
         maven "maven3.8"
     }
 
-	stages{
+    stages {
 		stage ('Test'){
 			steps{
-				input 'Do youwant too proceed?'
+				input 'Do you want to proceed?'
 			}
 		}
-	}
+	stage ('pre-build'){
+			parallel{
+				stage ('unittest'){
+					steps{
+						echo 'I am in Unit Testing Phase....'
+					}
+				}	
+				stage ('integrationtest'){
+					steps{
+						echo 'I am in Integration Testing Phase....'
+					}
+				}	
+			}
+		}
+	
         stage('Build') {
             steps {
                 // Get some code from a GitHub repository
-                git 'https://github.com/AshaPriyaG/BankApp.git'
+                git 'https://github.com/capgteam/bankapp.git'
 
                 // Run Maven on a Unix agent.
                 //sh "mvn -Dmaven.test.failure.ignore=true clean package"
@@ -34,4 +48,5 @@ pipeline {
                 }
             }
         }
-  }
+    }
+}
